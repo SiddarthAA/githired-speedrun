@@ -1,6 +1,6 @@
 from github import Github
 from typing import Optional
-
+import requests
 
 class GitHubService:
     def __init__(self, token: str):
@@ -38,8 +38,16 @@ class GitHubService:
         return commits
 
     def get_languages(self, owner: str, repo_name: str) -> dict:
-        repo = self.g.get_repo(f"{owner}/{repo_name}")
-        return {k: int(v) for k, v in dict(repo.get_languages()).items()}
+        resp = requests.get(
+            f"https://api.github.com/repos/{owner}/{repo_name}/languages",
+            headers={
+                "Authorization": f"Bearer {self.token}",
+                "Accept": "application/vnd.github+json",
+            },
+            timeout=10,
+        )
+        resp.raise_for_status()
+        return resp.json()
 
     def get_contributors(self, owner: str, repo_name: str) -> list[dict]:
         repo = self.g.get_repo(f"{owner}/{repo_name}")
