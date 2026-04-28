@@ -4,8 +4,8 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
-  title: "GitHub Analyzer",
-  description: "Code quality insights for your GitHub repositories",
+  title: "GitHired",
+  description: "AI-powered code quality insights for your GitHub repositories",
 };
 
 export default function RootLayout({

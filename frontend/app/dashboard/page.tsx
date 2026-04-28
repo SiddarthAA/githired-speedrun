@@ -12,7 +12,7 @@ export default async function Dashboard() {
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <span className="font-medium text-sm">GitHub Analyzer</span>
+          <span className="font-medium text-sm">GitHired</span>
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">
               {session.user?.name}

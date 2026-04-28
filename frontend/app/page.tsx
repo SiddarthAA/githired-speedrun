@@ -11,7 +11,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 p-8">
       <div className="text-center space-y-3 max-w-md">
         <h1 className="text-4xl font-semibold tracking-tight">
-          GitHub Analyzer
+          GitHired
         </h1>
         <p className="text-muted-foreground text-base leading-relaxed">
           Connect your GitHub account and get AI-powered insights on code
