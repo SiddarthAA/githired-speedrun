@@ -18,20 +18,28 @@ export default function AnalyzePage({
   const { owner, repo } = use(params);
   const [data, setData] = useState<Analysis | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchAnalysis(owner, repo)
       .then(setData)
+      .catch(() => setError("Analysis failed. The backend may be unavailable or the repository could not be accessed."))
       .finally(() => setLoading(false));
   }, [owner, repo]);
 
   if (loading) return <AnalysisSkeleton />;
-  if (!data)
+  if (error)
     return (
-      <div className="p-8 text-sm text-muted-foreground">
-        Failed to load analysis.
+      <div className="max-w-4xl mx-auto px-6 py-10">
+        <Link href="/dashboard" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6">
+          <ArrowLeft className="w-4 h-4" /> Back
+        </Link>
+        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+          {error}
+        </div>
       </div>
     );
+  if (!data) return null;
 
   const langTotal = Object.values(data.languages).reduce((a, b) => a + b, 0);
 

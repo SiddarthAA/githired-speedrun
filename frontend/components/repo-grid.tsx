@@ -7,10 +7,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 export function RepoGrid() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchRepos(10)
       .then(setRepos)
+      .catch(() => setError("Failed to load repositories. Make sure the backend is running."))
       .finally(() => setLoading(false));
   }, []);
 
@@ -21,6 +23,20 @@ export function RepoGrid() {
           <Skeleton key={i} className="h-36 rounded-xl" />
         ))}
       </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+        {error}
+      </div>
+    );
+  }
+
+  if (repos.length === 0) {
+    return (
+      <p className="text-sm text-muted-foreground">No repositories found.</p>
     );
   }
 
