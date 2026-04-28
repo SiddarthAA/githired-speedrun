@@ -10,11 +10,13 @@ import {
 
 export function CommitChart({
   data,
+  height = 160,
 }: {
   data: { week: string; count: number }[];
+  height?: number;
 }) {
   return (
-    <ResponsiveContainer width="100%" height={160}>
+    <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} barSize={6}>
         <XAxis
           dataKey="week"

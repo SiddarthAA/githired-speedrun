@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchAnalysis, type Analysis } from "@/lib/api";
 import { ScoreRadial } from "@/components/score-radial";
 import { CommitChart } from "@/components/commit-chart";
@@ -13,9 +13,9 @@ import Link from "next/link";
 export default function AnalyzePage({
   params,
 }: {
-  params: Promise<{ owner: string; repo: string }>;
+  params: { owner: string; repo: string };
 }) {
-  const { owner, repo } = use(params);
+  const { owner, repo } = params;
   const [data, setData] = useState<Analysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
