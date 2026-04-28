@@ -19,5 +19,6 @@ app.include_router(analysis.router, prefix="/analysis", tags=["analysis"])
 
 
 @app.get("/health")
+@app.get("/healthz")
 async def health():
     return {"status": "ok"}
