@@ -39,7 +39,7 @@ class GitHubService:
 
     def get_languages(self, owner: str, repo_name: str) -> dict:
         repo = self.g.get_repo(f"{owner}/{repo_name}")
-        return repo.get_languages()
+        return {k: int(v) for k, v in dict(repo.get_languages()).items()}
 
     def get_contributors(self, owner: str, repo_name: str) -> list[dict]:
         repo = self.g.get_repo(f"{owner}/{repo_name}")

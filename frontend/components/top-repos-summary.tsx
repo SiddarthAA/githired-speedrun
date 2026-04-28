@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { fetchRepos, fetchAnalysis, type Analysis } from "@/lib/api";
 import { AnalysisSummaryCard } from "./analysis-summary-card";
+import { AccountSummary } from "./account-summary";
 
 export function TopReposSummary() {
   const [analyses, setAnalyses] = useState<(Analysis | null)[]>([null, null, null]);
@@ -80,7 +81,7 @@ export function TopReposSummary() {
           Auto-analysis of your 3 most-starred repositories
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {[0, 1, 2].map((i) => (
           <AnalysisSummaryCard
             key={i}
@@ -89,6 +90,7 @@ export function TopReposSummary() {
           />
         ))}
       </div>
+      {analyses.some(Boolean) && <AccountSummary analyses={analyses} />}
     </section>
   );
 }

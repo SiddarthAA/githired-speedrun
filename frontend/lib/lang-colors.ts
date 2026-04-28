@@ -1,0 +1,35 @@
+export const LANG_COLORS: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f1e05a",
+  Python: "#3572A5",
+  Rust: "#dea584",
+  Go: "#00ADD8",
+  Java: "#b07219",
+  "C++": "#f34b7d",
+  C: "#555555",
+  Ruby: "#701516",
+  PHP: "#4F5D95",
+  Swift: "#F05138",
+  Kotlin: "#A97BFF",
+  CSS: "#563d7c",
+  HTML: "#e34c26",
+  Shell: "#89e051",
+  "Jupyter Notebook": "#DA5B0B",
+  Vue: "#41b883",
+  Dart: "#00B4AB",
+  "C#": "#178600",
+  Scala: "#c22d40",
+  "Objective-C": "#438eff",
+  Haskell: "#5e5086",
+  Elixir: "#6e4a7e",
+  Clojure: "#db5855",
+  Lua: "#000080",
+  R: "#198CE7",
+  MATLAB: "#e16737",
+  Dockerfile: "#384d54",
+  YAML: "#cb171e",
+};
+
+export function getLangColor(lang: string): string {
+  return LANG_COLORS[lang] ?? "#6b7280";
+}

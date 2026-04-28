@@ -126,12 +126,21 @@ class AnalysisService:
         return "F"
 
     def commit_frequency_by_week(self, commits: list) -> list[dict]:
-        """Return weekly commit counts for the chart."""
+        """Return weekly commit counts for the last 16 weeks, filling empty weeks with 0."""
         from collections import defaultdict
+        from datetime import timedelta
 
-        weeks: dict = defaultdict(int)
+        weeks_map: dict = defaultdict(int)
         for c in commits:
             dt = datetime.fromisoformat(c["date"].replace("Z", "+00:00"))
             week = dt.strftime("%Y-W%W")
-            weeks[week] += 1
-        return [{"week": k, "count": v} for k, v in sorted(weeks.items())[-16:]]
+            weeks_map[week] += 1
+
+        # Always return exactly 16 weeks ending this week, zero-filling gaps
+        today = datetime.now(timezone.utc)
+        result = []
+        for i in range(15, -1, -1):
+            day = today - timedelta(weeks=i)
+            week_key = day.strftime("%Y-W%W")
+            result.append({"week": week_key, "count": weeks_map.get(week_key, 0)})
+        return result
